@@ -13,9 +13,9 @@
  */
 
 /**
- * The main WordPress_Reset class.
+ * The main Ultimate_Reset class.
  */
-class WordPress_Reset {
+class Ultimate_Reset {
 
 	/**
 	 * Constructor. Contains Action/Filter Hooks.
@@ -60,17 +60,17 @@ class WordPress_Reset {
 	}
 
 	/**
-	 * Checks for wordpress_reset post value and if there deletes all wp tables
+	 * Checks for ultimate_reset post value and if there deletes all wp tables
 	 * and performs an install, also populating the users previous password.
 	 */
 	public function admin_init() {
 		global $current_user;
 
-		$wordpress_reset         = ( isset( $_POST['wordpress_reset'] ) && 'true' == $_POST['wordpress_reset'] );
-		$wordpress_reset_confirm = ( isset( $_POST['wordpress_reset_confirm'] ) && 'reset' == $_POST['wordpress_reset_confirm'] );
-		$valid_nonce             = ( isset( $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'wordpress_reset' ) );
+		$ultimate_reset         = ( isset( $_POST['ultimate_reset'] ) && 'true' == $_POST['ultimate_reset'] );
+		$ultimate_reset_confirm = ( isset( $_POST['ultimate_reset_confirm'] ) && 'reset' == $_POST['ultimate_reset_confirm'] );
+		$valid_nonce             = ( isset( $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'ultimate_reset' ) );
 
-		if ( $wordpress_reset && $wordpress_reset_confirm && $valid_nonce ) {
+		if ( $ultimate_reset && $ultimate_reset_confirm && $valid_nonce ) {
 			require_once ABSPATH . '/wp-admin/includes/upgrade.php';
 
 			$blogname    = get_option( 'blogname' );
@@ -147,7 +147,7 @@ class WordPress_Reset {
 			'<div id="message" class="updated fade"><p><strong>' . esc_html__( 'WordPress has been reset back to defaults. The user "%s" was recreated with its previous password.', 'ultimate-reset' ) . '</strong></p></div>',
 			esc_html( $user->user_login )
 		);
-		do_action( 'wordpress_reset_post', $user );
+		do_action( 'ultimate_reset_post', $user );
 	}
 
 	/**
@@ -180,14 +180,14 @@ class WordPress_Reset {
 	public function footer_js() { ?>
 		<script type="text/javascript">
 		/* <![CDATA[ */
-			jQuery('#wordpress_reset_submit').click(function(){
-				if ( 'reset' === jQuery('#wordpress_reset_confirm').val() ) {
+			jQuery('#ultimate_reset_submit').click(function(){
+				if ( 'reset' === jQuery('#ultimate_reset_confirm').val() ) {
 					var message = '<?php esc_html_e( 'This action is not reversable. Clicking OK will reset your database back to the defaults. Click Cancel to abort.', 'ultimate-reset' ); ?>',
 						reset   = confirm( message );
 					if ( reset ) {
-						jQuery('#wordpress_reset_form').submit();
+						jQuery('#ultimate_reset_form').submit();
 					} else {
-						jQuery('#wordpress_reset').val('false');
+						jQuery('#ultimate_reset').val('false');
 						return false;
 					}
 				} else {
@@ -227,7 +227,7 @@ class WordPress_Reset {
 	 */
 	public function admin_page() {
 		global $current_user, $reactivate_ultimate_reset_additional;
-		if ( isset( $_POST['wordpress_reset_confirm'] ) && 'reset' !== $_POST['wordpress_reset_confirm'] ) {
+		if ( isset( $_POST['ultimate_reset_confirm'] ) && 'reset' !== $_POST['ultimate_reset_confirm'] ) {
 			echo '<div class="error fade"><p><strong>' . esc_html__( 'Invalid confirmation word. Please type the word "reset" in the confirmation field.', 'ultimate-reset' ) . '</strong></p></div>';
 		} elseif ( isset( $_POST['_wpnonce'] ) ) {
 			echo '<div class="error fade"><p><strong>' . esc_html__( 'Invalid nonce. Please try again.', 'ultimate-reset' ) . '</strong></p></div>';
@@ -287,12 +287,12 @@ class WordPress_Reset {
 			<h3><?php esc_html_e( 'Reset', 'ultimate-reset' ); ?></h3>
 			<?php /* translators: reset. */ ?>
 			<p><?php printf( esc_html__( 'Type %s in the confirmation field to confirm the reset and then click the reset button:', 'ultimate-reset' ), '<strong>reset</strong>' ); ?></p>
-			<form id="wordpress_reset_form" action="" method="post">
-				<?php wp_nonce_field( 'wordpress_reset' ); ?>
-				<input id="wordpress_reset" type="hidden" name="wordpress_reset" value="true" />
-				<input id="wordpress_reset_confirm" type="text" name="wordpress_reset_confirm" value="" />
+			<form id="ultimate_reset_form" action="" method="post">
+				<?php wp_nonce_field( 'ultimate_reset' ); ?>
+				<input id="ultimate_reset" type="hidden" name="ultimate_reset" value="true" />
+				<input id="ultimate_reset_confirm" type="text" name="ultimate_reset_confirm" value="" />
 				<p class="submit">
-					<input id="wordpress_reset_submit" style="width: 80px;" type="submit" name="Submit" class="button-primary" value="<?php esc_html_e( 'Reset' ); ?>" />
+					<input id="ultimate_reset_submit" style="width: 80px;" type="submit" name="Submit" class="button-primary" value="<?php esc_html_e( 'Reset' ); ?>" />
 				</p>
 			</form>
 		</div>
@@ -302,5 +302,5 @@ class WordPress_Reset {
 
 // Instantiate the class.
 if ( is_admin() ) {
-	$wordpress_reset = new WordPress_Reset();	
+	$ultimate_reset = new Ultimate_Reset();
 }
