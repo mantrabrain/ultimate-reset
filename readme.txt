@@ -13,7 +13,6 @@ Resets the WordPress database back to it's defaults.
 
 This plugin is very helpful for plugin and theme developers.
 
-
 == Installation ==
 
 1. Upload the `ultimate-reset` folder to the `/wp-content/plugins/` directory or install directly through the plugin installer.
