@@ -2,8 +2,8 @@
 Contributors: mantrabrain
 Tags: ultimate-reset, wordpress, reset, admin
 Requires at least: 2.8
-Tested up to: 5.0.3
-Stable tag: 1.0.0
+Tested up to: 5.4
+Stable tag: 1.0.1
 
 Resets the WordPress database back to it's defaults.
 

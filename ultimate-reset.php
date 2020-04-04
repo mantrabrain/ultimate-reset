@@ -3,7 +3,7 @@
  * Plugin Name: Ultimate Reset
  * Description: Resets the WordPress back to it's defaults.
  * Author: Mantrabrain
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author URI: https://mantrabrain.com
  *
  * Ultimate Reset is released under the GNU General Public License (GPL)
